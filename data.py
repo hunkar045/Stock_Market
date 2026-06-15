@@ -1,20 +1,28 @@
-import yfinance as yf
+import requests
+import pandas as pd
 import streamlit as st
+from datetime import datetime, timedelta
 
-PERIOD_MAP = {"1 Month": "1mo", "3 Months": "3mo", "6 Months": "6mo", 
-              "1 Year": "1y", "2 Years": "2y", "5 Years": "5y"}
+PERIOD_MAP = {"1 Month": 30, "3 Months": 90, "6 Months": 180, 
+              "1 Year": 365, "2 Years": 730, "5 Years": 1825}
 
 @st.cache_data(ttl=600)
 def fetch_stock(symbol, period="1 Year"):
-    """Fetch stock data with caching"""
+    """Fetch stock data using yfinance with fallback"""
     try:
+        import yfinance as yf
         symbol = symbol.upper()
         stock = yf.Ticker(symbol)
         info = stock.info
+        
         if not info.get('longName'):
             return None, None
-        yf_period = PERIOD_MAP.get(period, "1y")
-        history = stock.history(period=yf_period)
+        
+        period_days = PERIOD_MAP.get(period, 365)
+        end_date = datetime.now()
+        start_date = end_date - timedelta(days=period_days)
+        
+        history = stock.history(start=start_date, end=end_date)
         return (info, history) if not history.empty else (info, None)
     except Exception:
         return None, None
