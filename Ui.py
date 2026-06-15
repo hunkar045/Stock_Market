@@ -1,7 +1,6 @@
 import streamlit as st
 
 def show_metrics(m):
-    """Display stock metrics in 4 columns"""
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Current Price", f"${m['price']:.2f}")
     col2.metric("Daily Change", f"${m['change']:.2f}", f"{m['change_pct']:.2f}%")
@@ -9,7 +8,6 @@ def show_metrics(m):
     col4.metric("52-Week Low", f"${m['low']:.2f}")
 
 def show_info(m):
-    """Display company info in 3 sections"""
     col1, col2, col3 = st.columns(3)
     with col1:
         st.markdown("### 📊 Trading Info")
@@ -25,7 +23,6 @@ def show_info(m):
         st.write(f"**Low:** ${m['low']:.2f}")
 
 def show_data(history, symbol):
-    """Display data table and download button"""
     st.subheader("📊 Historical Data")
     st.dataframe(history[['Open', 'High', 'Low', 'Close', 'Volume']].tail(20),
                  use_container_width=True)
@@ -33,7 +30,6 @@ def show_data(history, symbol):
                        f"{symbol}_data.csv", "text/csv")
 
 def sidebar():
-    """Sidebar with stock search and time period"""
     with st.sidebar:
         st.header("🔍 Search")
         symbol = st.text_input("Enter Stock Symbol", "TSLA", max_chars=5).upper().strip()
