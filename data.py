@@ -10,15 +10,12 @@ PERIOD_DAYS = {
 
 HEADERS = {"User-Agent": "Mozilla/5.0"}
 
-
 @st.cache_data(ttl=600)
 def fetch_stock(symbol, period="1 Year"):
-    """Fetch stock price history + company info from Yahoo Finance."""
     try:
         symbol = symbol.upper().strip()
         days = PERIOD_DAYS.get(period, 365)
 
-        # --- Step 1: Get price history ---
         now = int(datetime.now().timestamp())
         ago = int((datetime.now() - timedelta(days=days)).timestamp())
 
@@ -62,9 +59,7 @@ def fetch_stock(symbol, period="1 Year"):
     except Exception:
         return None, None
 
-
 def get_metrics(info):
-    """Turn raw info dict into display-ready metrics."""
     price = info.get("currentPrice", 0) or 0
     prev = info.get("previousClose", 0) or 1
     change = price - prev
