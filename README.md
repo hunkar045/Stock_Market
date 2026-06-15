@@ -46,6 +46,7 @@ Stock_Market/
 ├── Chart.py            # Plotly chart generation
 ├── Ui.py               # Streamlit UI components
 ├── requirements.txt    # Python dependencies
+├── runtime.txt         # Python version for deployment
 └── .streamlit/
     └── config.toml     # Streamlit theme & server config
 ```
