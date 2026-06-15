@@ -1,41 +1,64 @@
 # 📈 Stock Market Dashboard
 
-A clean, error-free Streamlit app for real-time stock market data with interactive charts.
+A real-time stock market dashboard built with **Streamlit** and **Yahoo Finance API**.
+
+![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.40-red?logo=streamlit)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 ## ✨ Features
-- 🔍 Real-time stock prices from Yahoo Finance
-- 📊 Interactive charts with moving averages (20-day & 50-day)
-- 💰 Key metrics (Price, Change %, 52-week High/Low)
-- 📋 Company info, sector, and volume data
+
+- 🔍 Search any stock by ticker symbol (AAPL, TSLA, MSFT, etc.)
+- 📊 Interactive price charts with 20-day & 50-day moving averages
+- 💰 Live metrics — price, daily change, 52-week high/low, volume
+- 🏢 Company info and sector details
 - 📥 Download historical data as CSV
-- ⚡ Fast, responsive, deployment-ready
+- ⏱️ Configurable time periods (1 month to 5 years)
+- ⚡ Cached API calls for fast performance
+
+## 🛠️ Tech Stack
+
+| Tool | Purpose |
+|------|---------|
+| Streamlit | Web UI framework |
+| Plotly | Interactive charts |
+| Pandas | Data processing |
+| Requests | Yahoo Finance API calls |
 
 ## 🚀 Quick Start
 
-### Install
 ```bash
+# Install dependencies
 pip install -r requirements.txt
-```
 
-### Run Locally
-```bash
+# Run the app
 streamlit run app.py
 ```
+
 Opens at `http://localhost:8501`
 
-## 📱 Usage
-1. Enter stock symbol (AAPL, MSFT, GOOGL, TSLA, etc.)
-2. View 6-month price chart with indicators
-3. Check metrics and company details
-4. Download data as CSV
+## 📁 Project Structure
 
-## 🌐 Deploy
+```
+Stock_Market/
+├── app.py              # Main entry point
+├── data.py             # Fetches stock data from Yahoo Finance API
+├── Chart.py            # Plotly chart generation
+├── Ui.py               # Streamlit UI components
+├── requirements.txt    # Python dependencies
+└── .streamlit/
+    └── config.toml     # Streamlit theme & server config
+```
 
-**Streamlit Cloud (Recommended):**
-1. Push to GitHub
-2. Go to [share.streamlit.io](https://share.streamlit.io)
-3. Select repo → Deploy
+## 🌐 Deploy on Replit
 
-**Other Platforms:**
-- Heroku, AWS, Azure, Google Cloud, Railway
-- All support Python + Streamlit apps
+1. Import this repo on [replit.com](https://replit.com)
+2. Set the **Run** command to: `streamlit run app.py`
+3. Click **▶ Run** — Replit installs packages automatically
+
+## 📸 Usage
+
+1. Enter a stock symbol in the sidebar (e.g. `AAPL`)
+2. Pick a time period
+3. View **Overview** → **Charts** → **Data** tabs
+4. Download CSV from the Data tab
