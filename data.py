@@ -7,7 +7,7 @@ PERIOD_MAP = {"1 Month": 30, "3 Months": 90, "6 Months": 180,
               "1 Year": 365, "2 Years": 730, "5 Years": 1825}
 
 # Free Alpha Vantage API Key
-API_KEY = "demo"  # Replace with your own key from alphavantage.co
+API_KEY = "JOVBYZNROUSS0UP"  
 
 @st.cache_data(ttl=600)
 def fetch_stock(symbol, period="1 Year"):
