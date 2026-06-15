@@ -4,18 +4,19 @@ import streamlit as st
 PERIOD_MAP = {"1 Month": "1mo", "3 Months": "3mo", "6 Months": "6mo", 
               "1 Year": "1y", "2 Years": "2y", "5 Years": "5y"}
 
-@st.cache_data(ttl=300)
+@st.cache_data(ttl=600)
 def fetch_stock(symbol, period="1 Year"):
     """Fetch stock data with caching"""
     try:
-        stock = yf.Ticker(symbol.upper())
+        symbol = symbol.upper()
+        stock = yf.Ticker(symbol)
         info = stock.info
         if not info.get('longName'):
             return None, None
         yf_period = PERIOD_MAP.get(period, "1y")
         history = stock.history(period=yf_period)
-        return info, history if not history.empty else None
-    except:
+        return (info, history) if not history.empty else (info, None)
+    except Exception:
         return None, None
 
 def get_metrics(info):

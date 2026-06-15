@@ -9,7 +9,9 @@ def main():
     st.title("📈 Stock Market Dashboard")
     
     symbol, period = sidebar()
-    info, history = fetch_stock(symbol, period)
+    
+    with st.spinner("📊 Loading stock data..."):
+        info, history = fetch_stock(symbol, period)
     
     if not info:
         st.error(f"❌ Stock not found: {symbol}")
